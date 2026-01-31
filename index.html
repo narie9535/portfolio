@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Portfolio</title>
+
+<style>
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
+    font-family: Arial, sans-serif;
+}
+
+body{
+    background-color: rgb(24, 22, 22);
+    color: white;
+}
+
+/* Navbar */
+.nav-bar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100px;
+    padding: 0 40px;
+}
+
+.nav-list ul{
+    display: flex;
+    gap: 25px;
+}
+
+.nav-list ul li a{
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.nav-list ul li a:hover{
+    text-shadow:
+        0 0 5px aqua,
+        0 0 15px aqua,
+        0 0 30px cyan;
+}
+
+/* Home Section */
+.main-content{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 100px;
+    margin-top: 80px;
+}
+
+.myDetails{
+    width: 50%;
+    margin-right: 80px;   
+}
+
+.myDetails h1{
+    font-size: 42px;
+}
+
+.myDetails p{
+    font-size: 20px;
+    margin: 15px 0;
+}
+
+.myImage{
+    width: 40%;
+    display: flex;
+    justify-content: center;
+    margin-left: 60px;   
+}
+
+.myImage img{
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 0 10px 2px rgb(246, 30, 232);
+}
+
+button{
+    background-color: rgb(60, 206, 60);
+    padding: 10px 25px;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    margin-right: 20px;
+}
+
+/* About Section (TRANSITION ADDED) */
+.about-section{
+    display: none;
+    padding: 80px 100px;
+    border-radius: 10px;
+    margin: 100px;
+    box-shadow: 0px 0px 10px pink;
+
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.about-section.active{
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.about-section h2{
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.about-content{
+    max-width: 800px;
+    color: #ccc;
+    line-height: 1.8;
+    font-size: 18px;
+}
+
+span{
+    color: aqua;
+}
+
+
+.projects-section{
+    display: none;
+    padding: 80px 100px;
+    text-align: center;
+}
+
+.projects-section h2{
+    font-size: 38px;
+    margin-bottom: 50px;
+}
+
+.projects-container{
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.project-card{
+    background: #1e1e1e;
+    width: 300px;
+    padding: 25px;
+    border-radius: 15px;
+    text-align: left;
+    box-shadow: 0 0 10px rgba(0,0,0,0.6);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.project-card:hover{
+    transform: translateY(-12px);
+    box-shadow: 0 0 20px aqua;
+}
+
+.project-card h3{
+    font-size: 22px;
+    margin-bottom: 10px;
+    color: aqua;
+}
+
+.project-card p{
+    font-size: 15px;
+    color: #ccc;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.tech{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.tech span{
+    background: #333;
+    padding: 5px 10px;
+    border-radius: 12px;
+    font-size: 13px;
+    color: aqua;
+}
+
+.project-card button{
+    background-color: rgb(60, 206, 60);
+    border: none;
+    padding: 8px 18px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.project-card button:hover{
+    background-color: rgb(40, 180, 40);
+}
+
+
+/* Skills Section */
+.skills-section{
+    display: none;
+    padding: 80px 100px;
+    text-align: center;
+}
+
+.skills-section h2{
+    font-size: 38px;
+    margin-bottom: 50px;
+}
+
+.skills-container{
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.skill-card{
+    background: #1e1e1e;
+    width: 250px;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.6);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.skill-card:hover{
+    transform: translateY(-10px);
+    box-shadow: 0 0 20px aqua;
+}
+
+.skill-card h3{
+    color: aqua;
+    font-size: 22px;
+    margin-bottom: 10px;   
+}
+
+.skill-card p{
+    color: #ccc;
+    font-size: 16px;
+}
+
+/* Contact Section */
+.contact-section{
+    display: none;
+    padding: 80px 100px;
+    text-align: center;
+}
+
+.contact-section h2{
+    font-size: 38px;
+    margin-bottom: 50px;
+}
+
+.contact-container{
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.contact-card{
+    width: 280px;
+    padding: 30px 25px;
+    border-radius: 18px;
+    text-align: center;
+    text-decoration: none;
+
+    background: linear-gradient(145deg, #1b1b1b, #252525);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+
+.contact-card:hover{
+    transform: translateY(-12px) scale(1.03);
+    box-shadow: 0 0 25px rgba(0,255,255,0.4);
+}
+
+.contact-card:hover::before{
+    opacity: 1;
+}
+
+.contact-card h3{
+    color: aqua;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.contact-card p{
+    color: #ccc;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+
+/* ================= MOBILE RESPONSIVE ================= */
+@media (max-width: 768px){
+
+/* NAVBAR */
+.nav-bar{
+    flex-direction: column;
+    height: auto;
+    padding: 20px;
+    gap: 15px;
+}
+
+.nav-list ul{
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+}
+
+/* HOME SECTION */
+.main-content{
+    flex-direction: column-reverse;
+    padding: 30px 20px;
+    margin-top: 30px;
+    text-align: center;
+}
+
+.myDetails{
+    width: 100%;
+    margin-right: 0;
+}
+
+.myDetails h1{
+    font-size: 30px;
+}
+
+.myDetails p{
+    font-size: 16px;
+}
+
+.myImage{
+    width: 100%;
+    margin-left: 0;
+    margin-bottom: 25px;
+}
+
+.myImage img{
+    width: 220px;
+    height: 220px;
+}
+
+button{
+    margin: 10px 5px;
+}
+
+/* ABOUT */
+.about-section{
+    margin: 20px;
+    padding: 40px 20px;
+}
+
+.about-section h2{
+    font-size: 28px;
+}
+
+.about-content{
+    font-size: 16px;
+}
+
+/* PROJECTS */
+.projects-section{
+    padding: 40px 20px;
+}
+
+.projects-section h2{
+    font-size: 30px;
+}
+
+.project-card{
+    width: 100%;
+    max-width: 350px;
+}
+
+/* SKILLS */
+.skills-section{
+    padding: 40px 20px;
+}
+
+.skills-section h2{
+    font-size: 30px;
+}
+
+.skill-card{
+    width: 100%;
+    max-width: 320px;
+}
+
+/* CONTACT */
+.contact-section{
+    padding: 40px 20px;
+}
+
+.contact-section h2{
+    font-size: 30px;
+}
+
+.contact-card{
+    width: 100%;
+    max-width: 320px;
+}
+}
+
+/* EXTRA SMALL DEVICES */
+@media (max-width: 480px){
+
+.myDetails h1{
+    font-size: 24px;
+}
+
+.nav-list ul li a{
+    font-size: 15px;
+}
+
+.project-card p,
+.skill-card p,
+.contact-card p{
+    font-size: 14px;
+}
+}
+
+
+
+</style>
+</head>
+
+<body>
+
+<!-- Navbar -->
+<nav class="nav-bar">
+    <h1>Narendra C</h1>
+
+    <div class="nav-list">
+        <ul>
+            <li><a onclick="showHome()">Home</a></li>
+            <li><a onclick="showAbout()">About</a></li>
+            <li><a onclick="showProjects()">Projects</a></li>
+            <li><a onclick="showSkills()">Skills</a></li>
+            <li><a onclick="showContact()">Contact</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Home Section -->
+<div class="main-content" id="home">
+    <div class="myDetails">
+        <h1>Hello, I'm <span>Narendra C</span></h1>
+        <p>I'm a Web Developer</p>
+        <button id="downloadCvBtn">Download CV</button>
+        <button>Projects</button>
+    </div>
+
+    <div class="myImage">
+        <img src="C:\Users\narie\OneDrive\Desktop\sample\My_img1.jpg" alt="My Photo">
+    </div>
+</div>
+
+<!-- About Section -->
+<section class="about-section" id="about">
+    <h2>About <span>Me</span></h2>
+
+    <div class="about-content">
+        <p>
+            I am <strong>Narendra C</strong>, a passionate Computer Applications student
+            with strong interest in web development.
+        </p>
+
+        <p>
+            I build responsive websites using <strong>HTML, CSS, JavaScript</strong>
+            and backend technologies like <strong>Java & JDBC</strong>.
+        </p>
+
+        <p>
+            I love learning new technologies and working on real-world projects.
+        </p>
+    </div>
+</section>
+
+<!--project-->
+
+<section class="projects-section">
+    <h2>My <span>Projects</span></h2>
+
+    <div class="projects-container">
+
+        <div class="project-card">
+            <h3>Quiz Management System</h3>
+            <p>
+                A web-based quiz platform built using HTML, CSS, JavaScript,
+                and PHP with secure backend logic.
+            </p>
+            <div class="tech">
+                <span>HTML</span>
+                <span>CSS</span>
+                <span>JS</span>
+                <span>PHP</span>
+            </div>
+            <button> <a href="https://github.com/narie9535/QuizWeb"> View Project</a></button>
+        </div>
+
+        <div class="project-card">
+            <h3>College Event Website</h3>
+            <p>
+                A dynamic event website with registration and database support
+                using Java and JDBC.
+            </p>
+            <div class="tech">
+                <span>HTML</span>
+                <span>CSS</span>
+                <span>Java</span>
+                <span>JDBC</span>
+            </div>
+            <button>View Project</button>
+        </div>
+
+        <div class="project-card">
+            <h3>E-Commerce Website</h3>
+            <p>
+                Shopping website for electronic items with user-friendly UI
+                and secure purchasing features.
+            </p>
+            <div class="tech">
+                <span>HTML</span>
+                <span>CSS</span>
+                <span>PHP</span>
+                <span>SQL</span>
+            </div>
+            <button>View Project</button>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- skill section -->
+<section class="skills-section" id="skills">
+    <h2>My <span>Skills</span></h2>
+
+    <div class="skills-container">
+
+        <div class="skill-card">
+            <h3>Frontend</h3>
+            <p>HTML, CSS, JavaScript</p>
+        </div>
+
+        <div class="skill-card">
+            <h3>Backend</h3>
+            <p>Java, JDBC, PHP</p>
+        </div>
+
+        <div class="skill-card">
+            <h3>Database</h3>
+            <p>MySQL, SQL</p>
+        </div>
+
+        <div class="skill-card">
+            <h3>Tools</h3>
+            <p>VS Code, GitHub, InfinityFree</p>
+        </div>
+
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section class="contact-section" id="contact">
+    <h2>Contact <span>Me</span></h2>
+
+    <div class="contact-container">
+
+        <a href="https://github.com/narie9535" target="_blank" class="contact-card">
+            <h3>GitHub</h3>
+            <p>View my projects & code</p>
+        </a>
+
+        <a href="https://www.linkedin.com/in/your-linkedin-id" target="_blank" class="contact-card">
+            <h3>LinkedIn</h3>
+            <p>Connect with me professionally</p>
+        </a>
+
+        <a href="mailto:yourmail@gmail.com" class="contact-card">
+            <h3>Email</h3>
+            <p>yourmail@gmail.com</p>
+        </a>
+
+    </div>
+</section>
+
+
+
+
+
+<script>
+const home = document.getElementById("home");
+const about = document.getElementById("about");
+const projects_section = document.getElementsByClassName("projects-section")[0];
+
+function showAbout(){
+    
+    home.style.display = "none";
+    about.style.display = "block";
+    skills.style.display = "none"; 
+   
+
+    setTimeout(() => {
+        about.classList.add("active");
+    }, 50);
+}
+
+function showHome(){
+    about.classList.remove("active");
+    projects_section.style.display ="none";
+
+
+    setTimeout(() => {
+        about.style.display = "none";
+        home.style.display = "flex";
+    }, 500);
+}
+
+function showProjects(){
+    home.style.display = "none";
+    about.style.display = "none";
+    about.classList.remove("active");
+
+    projects_section.style.display = "block";
+    setTimeout(() => {
+        about.classList.add("active");
+    }, 50);
+}
+
+document.getElementById("downloadCvBtn").addEventListener("click", function () {
+    window.open("Narendra_C_Resume.pdf", "_blank");  
+});
+
+// skills 
+const skills = document.getElementById("skills");
+
+function showSkills(){
+    home.style.display = "none";
+    about.style.display = "none";
+    projects_section.style.display = "none";
+    about.classList.remove("active");
+
+    skills.style.display = "block";
+}
+
+const contact = document.getElementById("contact");
+
+function showContact(){
+    home.style.display = "none";
+    about.style.display = "none";
+    projects_section.style.display = "none";
+    skills.style.display = "none";
+    about.classList.remove("active");
+
+    contact.style.display = "block";
+}
+
+
+</script>
+
+</body>
+</html>
